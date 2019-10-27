@@ -1,0 +1,23 @@
+spring:
+#  html模板配置
+  thymeleaf:
+    mode: HTML
+  datasource:
+    #数据库配置
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/myblog?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    username: root
+    password: zxc47POI!
+  jpa:
+    hibernate:
+      # ORM配置，update时，如果实体类进行更改，数据库也会更新，如果全部定下来后可以改为none
+      ddl-auto: update
+    show-sql: true  # 是否展示sql语句
+
+# 日志配置
+logging:
+  level:
+    root: info
+    com.zhouyi: debug
+  file:
+    name: log/blog.log
