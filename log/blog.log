@@ -810,3 +810,7 @@ com.zhouyi.myblog.NotFoundException: 博客不存在
 2019-10-27 15:53:26.650  INFO 12114 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 22 ms
 2019-10-27 15:53:26.748  INFO 12114 --- [http-nio-8080-exec-1] com.zhouyi.myblog.aspect.LogAspect       : Reuqest: RequestLog{url='http://localhost:8080/3/student', ip='0:0:0:0:0:0:0:1', classMethod='com.zhouyi.myblog.web.IndexControllor.index', args=[3, student]}
 2019-10-27 15:53:26.756  INFO 12114 --- [http-nio-8080-exec-1] com.zhouyi.myblog.aspect.LogAspect       : Result: index
+2019-10-27 15:55:57.448  INFO 12114 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2019-10-27 15:55:57.449  INFO 12114 --- [SpringContextShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2019-10-27 15:55:57.459  INFO 12114 --- [SpringContextShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2019-10-27 15:55:57.463  INFO 12114 --- [SpringContextShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
