@@ -4,6 +4,7 @@ import com.zhouyi.myblog.NotFoundException;
 import com.zhouyi.myblog.dao.BlogRepository;
 import com.zhouyi.myblog.po.Blog;
 import com.zhouyi.myblog.po.Type;
+import com.zhouyi.myblog.util.MyBeanUtils;
 import com.zhouyi.myblog.vo.BlogQuery;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,23 +56,28 @@ public class BlogServiceImpl implements BlogService {
         }, pageable);
     }
 
-    @Transactional
+    @org.springframework.transaction.annotation.Transactional
     @Override
     public Blog saveBlog(Blog blog) {
-        blog.setCreateTime(new Date());
-        blog.setUpdateTime(new Date());
-        blog.setViews(0);
+        if (blog.getId() == null) {
+            blog.setCreateTime(new Date());
+            blog.setUpdateTime(new Date());
+            blog.setViews(0);
+        } else {
+            blog.setUpdateTime(new Date());
+        }
         return blogRepository.save(blog);
     }
 
-    @Transactional
+    @org.springframework.transaction.annotation.Transactional
     @Override
     public Blog updateBlog(Long id, Blog blog) {
-        Blog b = blogRepository.findById(id).orElse(null);
+        Blog b = getBlog(id);
         if (b == null) {
             throw new NotFoundException("该博客不存在");
         }
-        BeanUtils.copyProperties(blog, b);
+        BeanUtils.copyProperties(blog,b, MyBeanUtils.getNullPropertyNames(blog));
+        b.setUpdateTime(new Date());
         return blogRepository.save(b);
     }
 
