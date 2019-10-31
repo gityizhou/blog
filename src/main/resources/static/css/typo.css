@@ -349,3 +349,8 @@ small, .typo-small,
 .typo img {
   max-width: 100%;
 }
+
+.typo li {
+  font-weight: 300;
+  padding: 4px 0;
+}

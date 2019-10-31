@@ -24,4 +24,6 @@ public interface BlogService {
     List<Blog> listRecommendBlogTop(Integer size);
 
     void deleteBlog(Long id);
+
+    Blog getAndConvert(Long id);
 }

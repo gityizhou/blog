@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:HH="http://www.w3.org/1999/xhtml">
 <head th:replace="_fragments :: head(~{::title})">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -43,30 +43,30 @@
 <!--            最上层博客信息-->
             <div class="ui horizontal link list">
                 <div class="item">
-                    <img src="https://picsum.photos/100/100?image=1005" alt="" class="ui avatar image">
-                    <div class="content"><a class="header m-text-thin" href="#">周一</a></div>
+                    <img src="https://picsum.photos/100/100?image=1005" th:src="@{${blog.user.avatar}}" alt="" class="ui avatar image">
+                    <div class="content"><a class="header m-text-thin" href="#" th:text="${blog.user.nickname}">周一</a></div>
                 </div>
                 <div class="item">
-                    <i class="calendar icon"></i> 2019-09-17
+                    <i class="calendar icon"></i> <span th:text="${#dates.format(blog.updateTime,'yyyy-MM-dd')}">2019-09-17</span>
                 </div>
                 <div class="item">
-                    <i class="eye icon"></i> 54
+                    <i class="eye icon"></i> <span th:text="${blog.views}">54</span>
                 </div>
             </div>
         </div>
         <div class="ui attached segment">
 <!--            fluid是为了撑满外层容器-->
 <!--            图片-->
-            <img src="https://picsum.photos/800/450?image=1002" alt="" class="ui fluid rounded image">
+            <img src="https://picsum.photos/800/450?image=1002" alt="" class="ui fluid rounded image" th:src="@{${blog.firstPicture}}">
         </div>
         <div class="ui attached padded segment">
 <!--            内容-->
             <div class="ui right aligned basic segment">
-                <div class="ui orange basic label">原创</div>
+                <div class="ui orange basic label" th:text="${blog.flag}">原创</div>
             </div>
-            <h2 class="ui center aligned header">到底怎样才能成为一个牛人？</h2>
+            <h2 class="ui center aligned header" th:text="${blog.title}">到底怎样才能成为一个牛人？</h2>
             <br>
-            <div id="content" class="typo typo-selection js-toc-content m-padded-lr-responsive m-padded-tb-large">
+            <div id="content" class="typo typo-selection js-toc-content m-padded-lr-responsive m-padded-tb-large" th:utext="${blog.content}">
                 <h2>一</h2>
                 <pre><code class="language-css">p { color: red }</code></pre>
                 <p>我是一个特别欣赏口才好的人，我也希望自己能够成为一个口才好的人。所以有一年我买了好多关于学习口才的书籍，决定一定要把它们看完，可是没到一个星期，我放弃了。因为一年时间太长，中途总有些事情打断了我计划好的坚持，所以，我在找时间短见效快的方式。</p>
@@ -82,10 +82,10 @@
             </div>
 <!--            标签-->
             <div class="m-padded-lr-responsive">
-                <div class="ui basic teal left pointing label">牛人升级</div>
+                <div class="ui basic teal left pointing label" th:each="tag : ${blog.tags}" th:text="${tag.name}">牛人升级</div>
             </div>
 <!--            赞赏-->
-            <div class="ui center aligned basic segment">
+            <div class="ui center aligned basic segment" th:if="${blog.appreciation}">
                 <button id="payButton" class="ui orange basic circular button">赞赏</button>
             </div>
             <div class="ui payQR flowing popup transition hidden">
@@ -105,11 +105,11 @@
         </div>
         <div class="ui attached positive message">
 <!--            博客信息-->
-            <div class="ui middle aligned grid">
+            <div class="ui middle aligned grid" th:if="${blog.shareStatement}">
                 <div class="eleven wide column">
                     <ui class="list">
-                        <li>作者：周一 （联系作者）</li>
-                        <li>发表时间：2019-09-18 09:20</li>
+                        <li>作者：<span th:text="${blog.user.nickname}">周一</span><a href="#" th:href="@{/about}" target="_blank">（联系作者）</a></li>
+                        <li>发表时间：<span th:text="${#dates.format(blog.updateTime,'yyyy-MM-dd HH:mm')}">2019-10-02 09:08</span></li>
                         <li>版权声明：自由转载-非商用-非衍生-保持署名 （创意共享3.0许可证）</li>
                         <li>公众号转载：请在文末添加作者公众号二维码</li>
                     </ui>
@@ -121,7 +121,7 @@
         </div>
         <div id="comment-container" class="ui bottom attached segment">
 <!--            留言区域列表-->
-            <div class="ui teal segment">
+            <div class="ui teal segment" th:if="${blog.commentabled}">
                 <div class="ui comments">
                     <h3 class="ui dividing header">牛人评论区</h3>
                     <div class="comment">
@@ -143,7 +143,7 @@
                     </div>
                     <div class="comment">
                         <a class="avatar">
-                            <img src="../static/images/touxiang.jpg" th:src="@{/images/zhouyi_touxiang.jpg}">
+                            <img src="../static/images/touxiang.jpg" th:src="@{/images/touxiang.jpg}">
                         </a>
                         <div class="content">
                             <a class="author">周一</a>
@@ -358,7 +358,7 @@
 
 
 
-<script>
+<script th:inline="javascript">
     $('.menu.toggle').click(function () {
         $('.m-item').toggleClass('m-mobile-hide');
     });
@@ -393,9 +393,12 @@
         popup : $('.wechat-qr.popup'),
         position: 'left center'
     });
+
+    var serurl = "http://yiblog.com"
+    var url = /*[[@{/blog/{id}(id=${blog.id})]]*/"";
     // 生成二维码
     var qrcode = new QRCode("qrcode", {
-        text: "http://jindo.dev.naver.com/collie",
+        text: serurl + url,
         width: 120,
         height: 120,
         colorDark : "#000000",
