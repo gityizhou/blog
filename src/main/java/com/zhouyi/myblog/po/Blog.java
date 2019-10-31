@@ -27,10 +27,12 @@ public class Blog {
     private boolean commentabled;
     private boolean published;
     private boolean recommend;
+    private String  description;
     @Temporal(TemporalType.TIMESTAMP)
     private Date createTime;
     @Temporal(TemporalType.TIMESTAMP)
     private Date updateTime;
+
 
     @ManyToOne
     private Type type;
@@ -46,6 +48,7 @@ public class Blog {
 
     @Transient
     private String tagIds;
+
 
     public Blog() {
     }
@@ -196,6 +199,14 @@ public class Blog {
         this.tagIds = tagIds;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public void init() {
         this.tagIds = tagsToIds(this.getTags());
     }
@@ -233,8 +244,14 @@ public class Blog {
                 ", commentabled=" + commentabled +
                 ", published=" + published +
                 ", recommend=" + recommend +
+                ", description='" + description + '\'' +
                 ", createTime=" + createTime +
                 ", updateTime=" + updateTime +
+                ", type=" + type +
+                ", tags=" + tags +
+                ", user=" + user +
+                ", comments=" + comments +
+                ", tagIds='" + tagIds + '\'' +
                 '}';
     }
 }
