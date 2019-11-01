@@ -16,3 +16,6 @@ logging:
     com.zhouyi: debug
   file:
     name: log/blog.log
+
+
+comment.avatar: /images/avatar.jpg
