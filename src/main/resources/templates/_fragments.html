@@ -20,7 +20,7 @@
             <a href="#" th:href="@{/}" class="m-item item m-mobile-hide" th:classappend="${n==1} ? 'active'"><i class="mini home icon"></i>首页</a>
             <a href="#" th:href="@{/types/-1}" class="m-item item m-mobile-hide" th:classappend="${n==2} ? 'active'"><i class="mini idea icon"></i>分类</a>
             <a href="#" th:href="@{/tag/-1}" class="m-item item m-mobile-hide" th:classappend="${n==3} ? 'active'"><i class="mini tags icon"></i>标签</a>
-            <a href="#" th:href="@{/archives/-1}" class="m-item item m-mobile-hide" th:classappend="${n==4} ? 'active'"><i class="mini clone icon"></i>归档</a>
+            <a href="#" th:href="@{/archives}" class="m-item item m-mobile-hide" th:classappend="${n==4} ? 'active'"><i class="mini clone icon"></i>归档</a>
             <a href="#" th:href="@{/about}" class="m-item item m-mobile-hide" th:classappend="${n==5} ? 'active'"><i class="mini info icon"></i>关于我</a>
             <div class="right item m-mobile-hide">
                 <form name="search" action="#" th:action="@{/search}" target="_blank" method="post">
@@ -51,18 +51,18 @@
             </div>
             <div class="three wide column">
                 <h4 class="ui inverted header m-text-thin m-text-spaced">最新博客</h4>
-                <div class="ui inverted link list">
-                    <a href="#" class="item">牛人故事 (Cower story)</a>
-                    <a href="#" class="item">关于刻意练习的清单</a>
-                    <a href="#" class="item">失败要趁早</a>
-                    <a href="#" class="item">这第一名到底有多难</a>
+                <div id="newblog-container">
+                    <div class="ui inverted link list" th:fragment="newblogList">
+                        <a href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank" class="item m-text-thin" th:each="blog : ${newblogs}" th:text="${blog.title}">用户故事（User Story）</a>
+                    </div>
                 </div>
+
             </div>
             <div class="three wide column">
                 <h4 class="ui inverted header m-text-thin">联系我</h4>
                 <div class="ui inverted link list">
-                    <a href="#" class="item">zhouyi119119@gmail.com</a>
-                    <a href="#" class="item">QQ: 807182431</a>
+                    <a href="#" class="item" th:text="#{index.email}">zhouyi119119@gmail.com</a>
+                    <a href="#" class="item" th:text="#{index.wechat}">QQ: 807182431</a>
                 </div>
             </div>
             <div class="seven wide column">
@@ -83,6 +83,10 @@
     <script src="../static/lib/prism/prism.js" th:src="@{/lib/prism/prism.js}"></script>
     <script src="../static/lib/tocbot/tocbot.min.js" th:src="@{/lib/tocbot/tocbot.min.js}"></script>
     <script src="../static/lib/qrcode/qrcode.min.js" th:src="@{/lib/qrcode/qrcode.min.js}"></script>
+
+    <script>
+        $('#newblog-container').load(/*[[@{/footer/newblog}]]*/"/footer/newblog");
+    </script>
 </th:block>
 </body>
 </html>

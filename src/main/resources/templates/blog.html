@@ -426,7 +426,7 @@
         position: 'left center'
     });
 
-    var serurl = "http://yiblog.com"
+    var serurl = /*[[#{blog.serurl}]]*/"127.0.0.1:8080";
     var url = /*[[@{/blog/{id}(id=${blog.id})}]]*/"";
     // 生成二维码
     var qrcode = new QRCode("qrcode", {
