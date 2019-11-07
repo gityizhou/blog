@@ -20,6 +20,7 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping("/admin")
 public class TypeController {
+
     @Autowired
     private TypeService typeService;
 

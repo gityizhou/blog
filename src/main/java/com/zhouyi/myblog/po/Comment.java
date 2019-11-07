@@ -24,7 +24,7 @@ public class Comment {
     private Blog blog;
 
     @OneToMany(mappedBy = "parentComment")
-    private List<Comment> replyComment = new ArrayList<>();
+    private List<Comment> replyComments = new ArrayList<>();
 
     @ManyToOne
     private Comment parentComment;
@@ -91,12 +91,12 @@ public class Comment {
         this.blog = blog;
     }
 
-    public List<Comment> getReplyComment() {
-        return replyComment;
+    public List<Comment> getReplyComments() {
+        return replyComments;
     }
 
-    public void setReplyComment(List<Comment> replyComment) {
-        this.replyComment = replyComment;
+    public void setReplyComments(List<Comment> replyComments) {
+        this.replyComments = replyComments;
     }
 
     public Comment getParentComment() {
@@ -125,7 +125,7 @@ public class Comment {
                 ", avatar='" + avatar + '\'' +
                 ", createTime=" + createTime +
                 ", blog=" + blog +
-                ", replyComment=" + replyComment +
+                ", replyComments=" + replyComments +
                 ", parentComment=" + parentComment +
                 ", adminComment=" + adminComment +
                 '}';

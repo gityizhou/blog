@@ -3,19 +3,25 @@ spring:
     mode: HTML
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/myblog?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    url: jdbc:mysql://localhost:3306/myblog?useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
     username: root
     password: zxc47POI!
   jpa:
     hibernate:
       ddl-auto: update
     show-sql: true
+  mvc:
+    favicon:
+      enabled: false
 logging:
   level:
     root: info
     com.zhouyi: debug
   file:
     name: log/blog.log
+
+server:
+  port: 8080
 
 
 comment.avatar: /images/avatar.jpg

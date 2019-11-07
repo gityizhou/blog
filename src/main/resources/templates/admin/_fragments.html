@@ -50,18 +50,18 @@
             </div>
             <div class="three wide column">
                 <h4 class="ui inverted header m-text-thin m-text-spaced">最新博客</h4>
-                <div class="ui inverted link list">
-                    <a href="#" class="item">牛人故事 (Cower story)</a>
-                    <a href="#" class="item">关于刻意练习的清单</a>
-                    <a href="#" class="item">失败要趁早</a>
-                    <a href="#" class="item">这第一名到底有多难</a>
+                <div id="newblog-container">
+                    <div class="ui inverted link list" th:fragment="newblogList">
+                        <a href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank" class="item m-text-thin" th:each="blog : ${newblogs}" th:text="${blog.title}">用户故事（User Story）</a>
+                    </div>
                 </div>
+
             </div>
             <div class="three wide column">
                 <h4 class="ui inverted header m-text-thin">联系我</h4>
                 <div class="ui inverted link list">
-                    <a href="#" class="item">zhouyi119119@gmail.com</a>
-                    <a href="#" class="item">QQ: 807182431</a>
+                    <a href="#" class="item" th:text="#{index.email}">zhouyi119119@gmail.com</a>
+                    <a href="#" class="item" th:text="#{index.wechat}">QQ: 807182431</a>
                 </div>
             </div>
             <div class="seven wide column">
